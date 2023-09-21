@@ -1,0 +1,95 @@
+# dictionary that stores types of vehicles and emissions they produce
+emissionTypes = {
+    "electricity": 0.37,    # gCO2e per kWh of electricity
+    "gasoline": 8887,       # gCO2e per mile driven in a gasoline car
+    "natural gas": 1830,    # gCO2e per cubic meter of natural gas
+    "hybrid": 110,         # gCO2e per cubic meter of hybrid fuel
+    "biofuel": 80          # gCO2e per cubic meter of biofuel
+}
+
+
+#this calculated the number of points someone earned by choosing their vehicle
+global pointSay
+
+#calculates emissions from electricity usage
+def electricityEmissions(kwh):
+    emissionFactor = emissionTypes.get("electricity", 0)
+    totalEmissions = kwh* emissionFactor
+    points(totalEmissions)
+    return totalEmissions
+    
+# calculates emissions from gasoline usage
+def gasEmissions(miles):
+    emissionFactor = emissionTypes.get("gasoline", 1)
+    totalEmissions= miles * emissionFactor
+    points(totalEmissions)
+    return totalEmissions
+
+# calculates emissions from natural gas usage
+def naturalGasEmissions(cubicMeters):
+    emissionFactor = emissionTypes.get("natural gas", 2)
+    totalEmissions= cubicMeters * emissionFactor
+    points(totalEmissions)
+    return totalEmissions
+
+# calculates emissions from biofuel usage
+def biofuelEmissions(co2e):
+    emissionFactor = emissionTypes.get("biofuel", 4)
+    totalEmissions= co2e * emissionFactor
+    points(totalEmissions)
+    return totalEmissions
+
+# calculates emissions from hybrid fuel usage
+def hybridEmissions(grams):
+    emissionFactor = emissionTypes.get("hybrid", 3)
+    totalEmissions= grams * emissionFactor
+    points(totalEmissions)
+    return totalEmissions
+
+# calculates # of points based on vehicle chosen 
+def points(totalEmissions):
+  if(totalEmissions<=100):
+      points+=3
+      print("You earned 3 Points. Way to go on Saving the environment. You are a valued customer!") 
+
+  if(totalEmissions>=101 and totalEmissions<151):
+      points+=2
+      print("You earned 2 points. You chose a vehicle that produces a moderate amount of emissions. Try picking a more eco-friendly vehicle!")
+
+  else:
+      points+=1
+      print("You earned only 1 point. Please try to look for other sustainable cars!")
+
+#calculates severity level of CO2 emissions
+def severityLvl(totalEmissions):
+     if(totalEmissions<=100):
+      print("LOW")
+
+     if(totalEmissions >= 101 and totalEmissions < 151):
+       print("MEDIUM")
+
+     else:
+      print("HIGH")
+  
+#user input that gets vehicle type and the number of miles to calculate co2 emissions/carbon footprint
+inp=input("Enter vehicle type: ")
+if(inp=="electric"):
+   inp=input("Enter miles the vehicle will drive: ")
+   electricityEmissions(inp)
+
+if(inp=="gasoline"):
+     inp=input("Enter miles the vehicle will drive: ")
+     gasEmissions(inp)
+if(inp=="hybrid"):
+   inp=input("Enter miles the vehicle will drive: ")
+   hybridEmissions(inp)
+
+if(inp=="natural gas"):
+      inp=input("Enter miles the vehicle will drive: ")
+      naturalGasEmissions(inp)
+else:
+      inp=input("Enter miles the vehicle will drive: ")
+      biofuelEmissions(inp)
+
+severityLvl(totalEmissions)
+points(totalEmissions)      
